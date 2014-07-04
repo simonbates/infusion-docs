@@ -8,30 +8,42 @@ Inline Edit allows a user to do quick edits to simple text without having to swi
 
 The basic form of the Inline Edit component is the Simple Text Inline Edit. Three specific integrations are also available:
 
-    a Dropdown Inline Edit
-    a Rich Text Inline Edit using the CKEditor
-    a Rich Text Inline Edit using TinyMCE
+- a Dropdown Inline Edit
+- a Rich Text Inline Edit using the CKEditor
+- a Rich Text Inline Edit using TinyMCE
 
 Simple Text Inline Edit
 -----------------------
 
+```javascript
 fluid.inlineEdit(container, options);
+```
+
+```javascript
 fluid.inlineEdits(container, options);
+```
 
 Creates an Inline Edit component (or multiple components) that uses a simple input field for the edit mode. See Simple Text Inline Edit API for details.
 
 Dropdown Inline Edit
 --------------------
 
+```javascript
 fluid.inlineEdit.dropdown(container, options);
+```
 
 Creates an Inline Edit component that uses a dropdown selection box for the edit mode. See Dropdown Inline Edit API for details.
 
 Rich Text Inline Edit
 ---------------------
 
+```javascript
 fluid.inlineEdit.CKEditor(container, options);
+```
+
+```javascript
 fluid.inlineEdit.tinyMCE(container, options);
+```
 
 Creates an Inline Edit component that uses a rich text editor for the edit mode. See Rich Text Inline Edit API for details.
 
@@ -191,25 +203,48 @@ Functions
 ---------
 
 These functions are defined on the central component  object returned from the inlineEdit creator function - for example with
+
+```javascript
 var myEdit = fluid.inlineEdit(componentContainer, options);
+```
+
+```javascript
 myEdit.edit();
+```
 
 Switches the component into edit mode. The events onBeginEdit and afterBeginEdit will fire.
+
+```javascript
 myEdit.finish();
+```
 
 Switches the component out of edit mode into display mode, updating the displayed text with the current content of the edit field. The events onFinishEdit and afterFinishEdit will fire. If the model value has changed, there will be a call to modelUpdated in between these calls.
+
+```javascript
 myEdit.cancel();
+```
 
 Cancels the in-progress edit and switches back to view mode.
+
+```javascript
 myEdit.isEditing();
+```
 
 Determines if the component is currently in edit mode: Returns true if edit mode is shown, false if view mode is shown.
+
+```javascript
 myEdit.refreshView(source);
+```
 
 Updates the state of the inline editor in the DOM, based on changes that may have happened to the model. source is an optional source object identifying the source of the change (see ChangeApplier documentation)
+
+```javascript
 myEdit.tooltipEnabled();
+```
 
 Returns a boolean indicating whether or not the tooltip is enabled.
+
+```javascript
 /**
   * Pushes external changes to the model into the inline editor, refreshing its
   * rendering in the DOM. The modelChanged event will fire.
@@ -218,8 +253,11 @@ Returns a boolean indicating whether or not the tooltip is enabled.
   * @param {Object} source An optional "source" (perhaps a DOM element) which triggered this event
   */
 myEdit.updateModelValue(newValue, source);
+```
 
 Updates the component's internal representation of the text to a new value. If the value differs from the existing value, the modelChanged event will fire and the component will be re-rendered.
+
+```javascript
 /**
   * Pushes external changes to the model into the inline editor, refreshing its
   * rendering in the DOM. The modelChanged event will fire.
@@ -229,9 +267,13 @@ Updates the component's internal representation of the text to a new value. If t
   * @param {Object} source An optional "source" (perhaps a DOM element) which triggered this event
   */
 myEdit.updateModel(newValue, source);
+```
 
 Similar to updateModelValue, only accepts specification of the overall model object (housing the editable value under the key value).
+
+```javascript
 myEdit.model
+```
 
 Not a function, but a data structure. This directly represents the "model" or state of the editable component. External users should consider this structure as read-only, and only make modifications through the updateModel call above.
 
@@ -412,9 +454,12 @@ useTooltip
 ### Additional options for Multiple Inline Edits
 
 The options for the creation of multiple Inline Edits are the same as those for the creation of a single Inline Edit, with the addition of a selector for identifying the editable elements. The default selector is defined as follows:
+
+```javascript
 selectors: {
     editables: ".flc-inlineEditable"
 }
+```
 
 InlineEdit Types
 ----------------
@@ -433,10 +478,14 @@ Dependencies
 ------------
 
 The Inline Edit dependencies can be met by including the MyInfusion.js file in the header of the HTML file:
+
+```javascript
 <script type="text/javascript" src="MyInfusion.js"></script>
+```
 
 Alternatively, the individual file requirements are:
 
+```javascript
 <script type="text/javascript" src="lib/jquery/core/js/jquery.js"></script>
 <script type="text/javascript" src="lib/jquery/ui/js/jquery.ui.core.js"></script>
 <script type="text/javascript" src="lib/jquery/ui/js/jquery.ui.widget.js"></script>
@@ -451,3 +500,4 @@ Alternatively, the individual file requirements are:
 <script type="text/javascript" src="components/tooltip/js/Tooltip.js"></script>
 <script type="text/javascript" src="components/inlineEdit/js/InlineEdit.js"></script>
 <script type="text/javascript" src="components/undo/js/Undo.js"></script>
+```
