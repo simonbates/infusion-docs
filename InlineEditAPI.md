@@ -2,6 +2,7 @@ Inline Edit API
 ===============
 
 Inline Edit
+-----------
 
 Inline Edit allows a user to do quick edits to simple text without having to switch modes or screens. All work is done on the same interface, which helps the user maintain context.
 
@@ -12,25 +13,34 @@ The basic form of the Inline Edit component is the Simple Text Inline Edit. Thre
     a Rich Text Inline Edit using TinyMCE
 
 Simple Text Inline Edit
+-----------------------
+
 fluid.inlineEdit(container, options);
 fluid.inlineEdits(container, options);
 
 Creates an Inline Edit component (or multiple components) that uses a simple input field for the edit mode. See Simple Text Inline Edit API for details.
+
 Dropdown Inline Edit
+--------------------
+
 fluid.inlineEdit.dropdown(container, options);
 
 Creates an Inline Edit component that uses a dropdown selection box for the edit mode. See Dropdown Inline Edit API for details.
+
 Rich Text Inline Edit
+---------------------
+
 fluid.inlineEdit.CKEditor(container, options);
 fluid.inlineEdit.tinyMCE(container, options);
 
 Creates an Inline Edit component that uses a rich text editor for the edit mode. See Rich Text Inline Edit API for details.
 
 Supported Events
+----------------
 
 The Inline Edit component fires the following events (for more information about events in the Infusion Framework, see Events):
 
-afterInitEdit
+### `afterInitEdit`
 
 Description
     
@@ -47,7 +57,8 @@ Parameters
 
 editor
 the instance of the editor component
-afterInitEdit
+
+### `afterInitEdit`
 
 Description
     
@@ -63,7 +74,8 @@ Parameters
     
 
 none
-onCreateEditView
+
+### `onCreateEditView`
 
 Description
     
@@ -86,7 +98,8 @@ A snapshot of the old value of the model structure before the current edit opera
 
 source
 An arbitrary object which optionally represents the "source" of the change, which can be checked by listeners to prevent cyclic events. Can often be undefined.
-modelChanged
+
+### `modelChanged`
 
 Description
     
@@ -102,7 +115,8 @@ Parameters
     
 
 none
-onBeginEdit
+
+### `onBeginEdit`
 
 Description
     
@@ -118,7 +132,8 @@ Parameters
     
 
 none
-onFinishEdit
+
+### `onFinishEdit`
 
 Description
     
@@ -144,7 +159,8 @@ A DOM node which holds the concrete editable control - this may vary in interpre
 
 viewNode
 A DOM node which holds the read-only representation of the editable value.
-afterFinishEdit
+
+### `afterFinishEdit`
 
 Description
     
@@ -170,7 +186,9 @@ A DOM node which holds the concrete editable control - this may vary in interpre
 
 viewNode
 A DOM node which holds the read-only representation of the editable value.
+
 Functions
+---------
 
 These functions are defined on the central component  object returned from the inlineEdit creator function - for example with
 var myEdit = fluid.inlineEdit(componentContainer, options);
@@ -218,24 +236,39 @@ myEdit.model
 Not a function, but a data structure. This directly represents the "model" or state of the editable component. External users should consider this structure as read-only, and only make modifications through the updateModel call above.
 
 Options
+-------
 
 The following options to the creator functions can be used to customize the behaviour of the Inline Edit component:
  
-selectors
-strings
-listeners
-styles
-paddings
-applyEditPadding
-submitOnEnter
-displayModeRenderer
-editModeRenderer
-displayAccessor
-displayView
-editAccessor
-editVIew
-lazyEditView
-blurHandlerBinder
+### `selectors`
+
+### `strings`
+
+### `listeners`
+
+### `styles`
+
+### `paddings`
+
+### `applyEditPadding`
+
+### `submitOnEnter`
+
+### `displayModeRenderer`
+
+### `editModeRenderer`
+
+### `displayAccessor`
+
+### `displayView`
+
+### `editAccessor`
+
+### `editVIew`
+
+### `lazyEditView`
+
+### `blurHandlerBinder`
 
 Description
     
@@ -252,7 +285,8 @@ Example
 fluid.inlineEdit("#myContainer", {
     blurHandlerBinder: ""
 });
-selectOnEdit
+
+### `selectOnEdit`
 
 Description
     
@@ -269,7 +303,8 @@ Example
 fluid.inlineEdit("#myContainer", {
     selectOnEdit: true
 });
-defaultViewText
+
+### `defaultViewText`
 
 Description
     
@@ -286,7 +321,8 @@ Example
 fluid.inlineEdit("#myContainer", {
     defaultViewText: ""
 });
-useTooltip
+
+### `useTooltip`
 
 Description
     
@@ -303,7 +339,8 @@ Example
 fluid.inlineEdit("#myContainer", {
     useTooltip: true
 });
-tooltipText
+
+### `tooltipText`
 
 Description
     
@@ -325,7 +362,8 @@ See also
     
 
 useTooltip
-tooltipID
+
+### `tooltipID`
 
 Description
     
@@ -347,7 +385,8 @@ See also
     
 
 useTooltip
-tooltipDelay
+
+### `tooltipDelay`
 
 Description
     
@@ -369,13 +408,16 @@ See also
     
 
 useTooltip
-Additional options for Multiple Inline Edits
+
+### Additional options for Multiple Inline Edits
 
 The options for the creation of multiple Inline Edits are the same as those for the creation of a single Inline Edit, with the addition of a selector for identifying the editable elements. The default selector is defined as follows:
 selectors: {
     editables: ".flc-inlineEditable"
 }
+
 InlineEdit Types
+----------------
 
 Several of the InlineEdit configuration elements make use of various "Implicit" or "Duck Typed" objects which have particular structures or signatures.
 Type name
@@ -388,6 +430,7 @@ InlineEditView  Appears as displayView and editView. Used to wrap the action of 
 InlineEditRenderer  Appears as editModeRenderer. Actually a function, rather than a structure, with a fairly complex contract. Is passed the entire component that in order to inspect the current markup situation at startup time, to manipulate it if necessary to render and initialise the editable component view, and return the relevant nodes which it has either created or discovered.   function (that) -> { container, field }
 
 Dependencies
+------------
 
 The Inline Edit dependencies can be met by including the MyInfusion.js file in the header of the HTML file:
 <script type="text/javascript" src="MyInfusion.js"></script>
