@@ -153,6 +153,10 @@ a:focus {
     border:1px solid #e7e7e7;
 }
 
+.infusion-docs table td ul {
+    font-size: inherit;
+}
+
 .infusion-docs-container .infusion-docs-header {
     background-color: #323232;
     height: 7rem;

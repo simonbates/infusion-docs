@@ -33,6 +33,10 @@ The following options are supported by all component grades:
 </pre></td>
   </tr>
   <tr>
+    <th>Merging</th>
+    <td>The <code>gradeNames</code> are added to the <code>gradeNames</code> of ancestor grades to form a single array.</td>
+  </tr>
+  <tr>
     <th>See also</th>
     <td><a href="ComponentGrades.md">Component Grades</a></td>
   </tr>
@@ -56,6 +60,10 @@ The following options are supported by all component grades:
     ...
 });</code>
 </pre></td>
+  </tr>
+  <tr>
+    <th>Merging</th>
+    <td>Default merge policy (see <a href="OptionsMerging.md">Options Merging</a>).</td>
   </tr>
   <tr>
     <th>See also</th>
@@ -109,6 +117,10 @@ The following options are supported by all component grades:
     ...
 });</code>
 </pre></td>
+  </tr>
+  <tr>
+    <th>Merging</th>
+    <td>Default merge policy (see <a href="OptionsMerging.md">Options Merging</a>).</td>
   </tr>
   <tr>
     <th>See also</th>
@@ -174,6 +186,10 @@ The following options are supported by all component grades:
 </pre></td>
   </tr>
   <tr>
+    <th>Merging</th>
+    <td>Default merge policy (see <a href="OptionsMerging.md">Options Merging</a>).</td>
+  </tr>
+  <tr>
     <th>See also</th>
     <td><a href="tutorial-gettingStartedWithInfusion/Subcomponents.md">Tutorial: Subcomponents</a></td>
   </tr>
@@ -204,6 +220,10 @@ The following options are supported by all component grades:
     ...
 });</code>
 </pre></td>
+  </tr>
+  <tr>
+    <th>Merging</th>
+    <td>Default merge policy (see <a href="OptionsMerging.md">Options Merging</a>).</td>
   </tr>
   <tr>
     <th>See also</th>
@@ -257,6 +277,10 @@ See also: [Component Grades](ComponentGrades.md)
     ...
 });</code>
 </pre></td>
+  </tr>
+  <tr>
+    <th>Merging</th>
+    <td>See the Initial Transaction section of <a href="ModelRelay.md">Model Relay</a>.</td>
   </tr>
   <tr>
     <th>See also</th>
@@ -408,6 +432,16 @@ See also: [Component Grades](ComponentGrades.md)
     ...
 });</code>
 </pre></td>
+  </tr>
+  <tr>
+    <th>Merging</th>
+    <td>Listeners are combined with those from ancestor grades following these rules:
+      <ul>
+        <li>A listener for an event with no listeners already defined in ancestor grades is added to the ancestor event listeners</li>
+        <li>A non-namespaced listener for an event with existing listener(s) is added to those defined in ancestor grades (listener priorities control the order of execution of multiple listeners for the same event)</li>
+        <li>A namespaced listener overrides any listener defined for the same event and namespace</li>
+      </ul>
+    </td>
   </tr>
   <tr>
     <th>See also</th>
