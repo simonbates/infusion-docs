@@ -200,6 +200,24 @@ aPromise.resolve("from-promise");
 // Output: ["aValue", "from-promise", "from-function", "from-task"]
 ```
 
+If a promise source element is rejected, the promise returned from `fluid.promise.sequence` will be rejected with a value from the first promise in the sequence that was rejected. Example:
+
+```javascript
+var p1 = fluid.promise();
+var p2 = fluid.promise();
+
+fluid.promise.sequence(["val1", p1, "val2", p2]).then(function (values) {
+    console.log("Resolved: " + values);
+}, function (value) {
+    console.log("Rejected: " + value);
+});
+
+p2.reject("p2-rejection");
+p1.reject("p1-rejection");
+
+// Output: Rejected: p1-rejection
+```
+
 ### fluid.promise.fireTransformEvent(event, payload[, options])
 
 * `event {`[`Event`](InfusionEventSystem.md)`}` A "pseudoevent" whose listeners are to be treated as sucessive (asynchronous) stages in the process of transforming a payload.
