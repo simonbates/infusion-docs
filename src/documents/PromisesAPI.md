@@ -158,7 +158,7 @@ are responsive to an additional element of our promises API, the  [`promise.accu
 
 * `sources {Array of {Any|Promise|Function:(options {Object}) →  {Any|Promise}}}` An array of sources of values or promises which will be evaluated in sequence.
 * `options {Object}` [optional] A structure of options which will be supplied to function members of `sources`.
-* Returns: `{Promise}` A promise for the resolved source elements.
+* Returns: `{Promise}` A promise for the evaluated source elements.
 
 Accepts an array of values, promises, functions returning values, or functions returning promises and evaluates them in sequence. The source elements are evaluated as follows:
 
