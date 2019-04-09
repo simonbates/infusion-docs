@@ -158,14 +158,47 @@ are responsive to an additional element of our promises API, the  [`promise.accu
 
 * `sources {Array of {Any|Promise|Function:(options {Object}) →  {Any|Promise}}}` An array of sources of values or promises which will be evaluated in sequence.
 * `options {Object}` [optional] A structure of options which will be supplied to function members of `sources`.
+* Returns: `{Promise}` A promise for the resolved source elements.
 
-Accepts an array of values, promises, functions returning values or functions returning promises and evaluates them in sequence. Evaluating a value is a no-op which returns the value itself.
+Accepts an array of values, promises, functions returning values, or functions returning promises and evaluates them in sequence. The source elements are evaluated as follows:
+
+* Value: evaluates to itself
+* Promise: evaluates to the promise resolution, or rejection
+* Function returning a value: evaluates to the returned value
+* Function returning a promise: evaluates to the resolution, or rejection, of the returned promise
+
 Note that a standard name for a "function returning a promise" is a *task* - this implementation can be directly compared to
 [sequence](https://github.com/cujojs/when/blob/master/docs/api.md#whensequence) in the [when.js library](https://github.com/cujojs/when).
 
 In the case that the source element is a function returning a promise (a task), `fluid.promise.sequence` will ensure that
 at most one of these in "in flight" at a time - that is, the succeeding function will not be invoked
 until the promise at the preceding position has resolved.
+
+The following example shows `fluid.promise.sequence` being called on an array with one of each of the supported source element types; when run, it will log the values array `["aValue", "from-promise", "from-function", "from-task"]`:
+
+```javascript
+var aPromise = fluid.promise();
+
+var aFunc = function () {
+    return "from-function";
+};
+
+var aTask = function () {
+    var togo = fluid.promise();
+    setTimeout(function () {
+        togo.resolve("from-task");
+    }, 100);
+    return togo;
+};
+
+fluid.promise.sequence(["aValue", aPromise, aFunc, aTask]).then(function (values) {
+    console.log(values);
+});
+
+aPromise.resolve("from-promise");
+
+// Output: ["aValue", "from-promise", "from-function", "from-task"]
+```
 
 ### fluid.promise.fireTransformEvent(event, payload[, options])
 
